@@ -50,4 +50,8 @@ Contiene la clase
   * **data_quality.py**
     realiza una comprobación para determinar si datos erroneos en algún registro de las tablas insertadas.
 
+### DAG  
+![DAG](/IMG/dag.png)
 
+#### RESULTADO ETL
+![TREE](/IMG/tree.png)
