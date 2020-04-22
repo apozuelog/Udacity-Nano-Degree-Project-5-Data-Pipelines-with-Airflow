@@ -15,7 +15,8 @@ The source data resides in S3 and needs to be processed in Sparkify's data wareh
 * /dags/udac_example_dag.py  
 Contiene la implementación de los operadores:  
   - StageToRedshiftOperator, LoadFactOperator, LoadDimensionOperator, DataQualityOperator  
-así como el orden de las task:  
+
+Así como el orden de ejecución de las task:  
 start_operator >> stage_events_to_redshift  
 start_operator >> stage_songs_to_redshift  
 stage_events_to_redshift >> load_songplays_table  
@@ -29,3 +30,19 @@ load_song_dimension_table >> run_quality_checks
 load_artist_dimension_table >> run_quality_checks  
 load_time_dimension_table >> run_quality_checks  
 run_quality_checks >> end_operator  
+
+* /plugins/helpers/sql_queries.py  
+Contiene la clase 
+  - SqlQueries 
+    - songplay_table_insert
+    - user_table_insert
+    - song_table_insert
+    - artist_table_insert
+    - time_table_insert
+
+* /plugins/operators/...
+  * stage_redshift.py
+    se encarga de cargar los archivos json a nuestras tablas staging_events y staging_songs de nuestro Redshift mediante el operador StageToRedshiftOperator
+  * load_fact.py
+  * load_dimension.py
+  * data_quality.py
