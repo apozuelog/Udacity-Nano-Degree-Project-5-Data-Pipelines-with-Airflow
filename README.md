@@ -8,11 +8,11 @@ They have decided to bring you into the project and expect you to create high gr
 The source data resides in S3 and needs to be processed in Sparkify's data warehouse in Amazon Redshift. The source datasets consist of JSON logs that tell about user activity in the application and JSON metadata about the songs the users listen to.
 
 ### Datasets
-* Log data: s3://udacity-dend/log_data
-* Song data: s3://udacity-dend/song_data
+* **Log data: s3://udacity-dend/log_data
+* **Song data: s3://udacity-dend/song_data
 
 ### Projects components
-* /dags/udac_example_dag.py  
+* **/dags/udac_example_dag.py**  
 Contiene la implementación de los operadores:  
   - StageToRedshiftOperator, LoadFactOperator, LoadDimensionOperator, DataQualityOperator  
 
@@ -31,7 +31,7 @@ Contiene la implementación de los operadores:
   load_time_dimension_table >> run_quality_checks  
   run_quality_checks >> end_operator  
 
-* /plugins/helpers/sql_queries.py  
+* **/plugins/helpers/sql_queries.py**  
 Contiene la clase 
   - SqlQueries 
     - songplay_table_insert
@@ -40,9 +40,14 @@ Contiene la clase
     - artist_table_insert
     - time_table_insert
 
-* /plugins/operators/...
-  * stage_redshift.py
-    se encarga de cargar los archivos json a nuestras tablas staging_events y staging_songs de nuestro Redshift mediante el operador StageToRedshiftOperator
-  * load_fact.py
-  * load_dimension.py
-  * data_quality.py
+* **/plugins/operators/...**
+  * **stage_redshift.py**
+    copia los archivos json a nuestras tablas staging_events y staging_songs de Redshift mediante el operador StageToRedshiftOperator
+  * **load_fact.py**
+    inserta los registros seleccionados en las tablas de hechos de nuestro Redshift mediante el operador LoadFactOperator
+  * **load_dimension.py**
+    inserta los registros seleccionados en las tablas de dimensiones de nuestro Redshift mediante el operador LoadDimensionOperator
+  * **data_quality.py**
+    realiza una comprobación para determinar si datos erroneos en algún registro de las tablas insertadas.
+
+
