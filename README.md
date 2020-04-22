@@ -16,7 +16,7 @@ The source data resides in S3 and needs to be processed in Sparkify's data wareh
 Contiene la implementación de los operadores:  
 - StageToRedshiftOperator, LoadFactOperator, LoadDimensionOperator, DataQualityOperator  
 así como el orden de las task:  
-DAG tasks
+DAG tasks  
 start_operator >> stage_events_to_redshift  
 start_operator >> stage_songs_to_redshift  
 stage_events_to_redshift >> load_songplays_table  
