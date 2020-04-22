@@ -53,5 +53,5 @@ Contains the class
 ### DAG  
 ![DAG](/IMG/dag.png)
 
-#### RESULTADO ETL
+### ETL RESULT
 ![TREE](/IMG/tree.PNG)
