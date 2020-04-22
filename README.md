@@ -54,4 +54,4 @@ Contiene la clase
 ![DAG](/IMG/dag.png)
 
 #### RESULTADO ETL
-![TREE](/IMG/tree.png)
+![TREE](/IMG/tree.PNG)
