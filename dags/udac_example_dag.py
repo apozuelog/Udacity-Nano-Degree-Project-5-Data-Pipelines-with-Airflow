@@ -7,7 +7,8 @@ from airflow.operators import (StageToRedshiftOperator, LoadFactOperator,
 from helpers import SqlQueries
 
 default_args = {
-    'owner': 'udacity',
+    'owner': 'apozuelo',
+    'catchup': False,
     'depends_on_past': False,
     'retries': 0,
     'retry_delay': timedelta(minutes=10),
@@ -18,8 +19,8 @@ default_args = {
 dag = DAG('udac_example_dag',
           default_args=default_args,
           description='Load and transform data in Redshift with Airflow',
-          schedule_interval='0 * * * *',
-          catchup=False
+          schedule_interval='@monthly',
+          catchup = False
         )
 
 start_operator = DummyOperator(task_id='Begin_execution',  dag=dag)
@@ -43,7 +44,7 @@ stage_songs_to_redshift = StageToRedshiftOperator(
     redshift_conn_id="redshift",
     aws_credentials_id="aws_credentials",
     s3_bucket="udacity-dend",
-    s3_key="song_data/",
+    s3_key="song_data/A/A/A",
     json_path="auto",
     file_type="json"
 )

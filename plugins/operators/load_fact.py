@@ -5,6 +5,10 @@ from airflow.utils.decorators import apply_defaults
 class LoadFactOperator(BaseOperator):
 
     ui_color = '#F98866'
+    
+    trunc = """
+        TRUNCATE TABLE {};
+    """
 
     insert_sql = """
         INSERT INTO {}
@@ -12,12 +16,12 @@ class LoadFactOperator(BaseOperator):
         COMMIT;
     """
 
-
     @apply_defaults
     def __init__(self,
                  redshift_conn_id="",
                  table="",
                  load_sql_stmt="",
+                 trunc = False,
                  *args, **kwargs):
 
         super(LoadFactOperator, self).__init__(*args, **kwargs)
@@ -28,8 +32,17 @@ class LoadFactOperator(BaseOperator):
     def execute(self, context):
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
         self.log.info("Loading fact table in Redshift")
+        
+        if self.trunc == True:
+            formatted_sql = LoadFactOperator.trunc.format(
+                self.table
+            )
+            self.log.info("Truncate fact table in Redshift")
+            redshift.run(formatted_sql)
+        
         formatted_sql = LoadFactOperator.insert_sql.format(
             self.table,
             self.load_sql_stmt
         )
+        self.log.info("Insert fact table in Redshift")
         redshift.run(formatted_sql)
